@@ -1,0 +1,38 @@
+#container {
+  max-width: 1120px;
+  margin: 0 45px;
+  background-color: #fff;
+}
+
+header {
+  display: grid;
+  grid-template-columns: 50px 1fr 1fr;
+}
+
+.table-content {
+  margin-top: 20px;
+  .item {
+    display: grid;
+    grid-template-columns: 50px 1fr 1fr;
+    margin-bottom: 15px;
+    background-color: gray;
+    color: #fff;
+    padding: 10px 0 10px 10px;
+  }
+}
+
+.action {
+  margin-bottom: 40px;
+  display: flex;
+  justify-content: center;
+  button  {
+    background-color: #ed3737;
+    color: #fff;
+    border: none;
+    padding: 12px 20px;
+    cursor: pointer;
+  }
+}
+tr.line td {
+  padding: 10px 0;
+}

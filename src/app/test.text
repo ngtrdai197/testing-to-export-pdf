@@ -1,6 +1,6 @@
 import { Component, ElementRef, ViewChild } from '@angular/core';
-import { jsPDF } from 'jspdf';
-import html2Canvs from 'html2canvas';
+import jsPDF from 'jspdf';
+// import html2Canvs from 'html2canvas';
 import autoTable from 'jspdf-autotable';
 
 // declare var jsPDF: any;
@@ -192,10 +192,10 @@ export class AppComponent {
   ];
 
   @ViewChild('contentExport') contentExport: ElementRef;
-  @ViewChild('table1') table1: HTMLTableElement;
 
   onExportPdf() {
-    const doc = new jsPDF('p', 'pt', 'a4');
+    const doc = new jsPDF('p','pt', 'a4');
+
     // doc.addHTML(this.contentExport.nativeElement, function () {
     //   doc.save('test.pdf');
     // });
@@ -207,58 +207,43 @@ export class AppComponent {
     //   doc.addImage(parseImage, 'JPGE', 0, 0, width, height);
     //   doc.save('test.pdf');
     // });
-    let finalY = 22;
-
+    // const doc = new jsPDF();
+    autoTable(doc, { html: '#test' });
+    doc.save('table.pdf');
+    // doc.text(
+    //   `Lorem ipsum dolor sit amet consectetur adipisicing elit. Amet tenetur corrupti
+    // labore dolorem perspiciatis ea harum, rem quidem fugiat error velit non
+    // adipisci sunt debitis, accusamus eos odit mollitia et reiciendis omnis quis
+    // repellat quaerat. Dolor, eos aspernatur magnam temporibus quam numquam,
+    // blanditiis ipsa perspiciatis minus consequatur nobis nisi fugit.`,
+    //   20,
+    //   20
+    // );
     // autoTable(doc, {
-    //   theme: 'grid',
-    //   headStyles: { fontSize: 15 },
-    //   bodyStyles: { fontSize: 12, fontStyle: 'normal' },
-
-    //   head: [['ID', 'Name', 'Country']],
+    //   head: [['No.', 'Name', 'Position']],
     //   body: this.data.map((rec, i) => {
     //     return [i + 1, rec.name, rec.position];
     //   }),
     //   showHead: 'firstPage',
-    //   didDrawPage: function (dataTable1) {
-    //     console.log('dataTable1 :>> ', dataTable1);
-    //     finalY = dataTable1?.doc?.lastAutoTable?.finalY ?? 10;
-    //     console.log(finalY);
-    //     // console.log(
-    //     //   'dataTable1?.doc?.lastAutoTable :>> ',
-    //     //   dataTable1?.doc?.lastAutoTable
+    //   margin: {
+    //     top: 110,
+    //   },
+    //   didDrawPage: (data) => {
+    //     console.log('data :>> ', data);
+    //     const { left, right, top } = data.settings.margin;
+    //     doc.setFontSize(12);
+    //     doc.addHTML(document.getElementById('text-content'), left, 10);
+
+    //     // doc.text(`Company Name: Favie tech`, left, top);
+    //     // doc.text(
+    //     //   `Company Address: 22 Huynh Khuong Ninh, Dakao, Q1, HCM`,
+    //     //   left,
+    //     //   top + 20
     //     // );
+    //     // doc.text(`Company Siret: Company Siret Development`, right, top);
     //   },
     // });
-
-    autoTable(doc, {
-      html: '#table-content',
-      useCss: true,
-    });
-    autoTable(doc, {
-      startY: 120,
-      html: '#table1',
-      useCss: true,
-      didDrawPage: (data) => {
-        const { left } = data.settings.margin;
-        console.log('data :>> ', data);
-        console.log('data.table.finalY :>> ', data.table.finalY);
-
-        // finalY = data.table.finalY || 10;
-      },
-      showHead: 'firstPage',
-    });
-    console.log('doc.internal.pageSize.height :>> ', doc.internal.pageSize.height);
-    autoTable(doc, {
-      startY: 120,
-      html: '#table2',
-      useCss: true,
-      showHead: 'firstPage',
-    });
-    // autoTable(doc, {
-    //   startY: finalY + 20,
-    //   html: '#table1',
-    //   useCss: true,
-    // });
-    doc.output('dataurlnewwindow'); //to check pdf generate
+    // autoTable(doc, { html: '#test' });
+    // doc.save('table.pdf');
   }
 }
